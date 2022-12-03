@@ -36,3 +36,15 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# custom
+.idea/
+.mvn/
+mvnw
+mvnw.cmd
+pom.xml
+WEB-INF
+META-INF
+src/main/java
+src/main/resources
+src/test
