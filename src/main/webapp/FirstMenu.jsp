@@ -62,7 +62,7 @@
 				case "3": status = "금융당국에 보고됨";
 				break;
 			}
-			out.println("<td>"+state+"</td>");
+			out.println("<td>"+status+"</td>");
 			out.println("</tr>");		
 		}
 		out.println("</table>");
@@ -96,7 +96,7 @@
 				case "3": status = "금융당국에 보고됨";
 				break;
 			}
-			out.println("<td>"+state+"</td>");
+			out.println("<td>"+status+"</td>");
 			out.println("</tr>");		
 		}
 		out.println("</table>");
@@ -132,7 +132,7 @@
 					case "3": status = "금융당국에 보고됨";
 					break;
 				}
-				out.println("<td>"+state+"</td>");
+				out.println("<td>"+status+"</td>");
 				out.println("</tr>");		
 			}
 			out.println("</table>");
@@ -166,7 +166,7 @@
 					case "3": status = "금융당국에 보고됨";
 					break;
 				}
-				out.println("<td>"+state+"</td>");
+				out.println("<td>"+status+"</td>");
 				out.println("</tr>");		
 			}
 			out.println("</table>");
