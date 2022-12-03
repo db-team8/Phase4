@@ -13,20 +13,12 @@
 
 <div class="transaction" width="500px" id="transaction">
     <!-- <iframe src="transactions.jsp" name='transaction'></iframe>  -->
+<%@ include file="dbconn.jsp"%>
+<%
+    int cnt;
+    ResultSet rs;
+%>
     <%
-        String serverIP = "localhost";
-        String strSID = "orcl";
-        String portNum = "1521";
-        String user = "db8";
-        String pass = "db8";
-        String url = "jdbc:oracle:thin:@"+serverIP+":"+portNum+":"+strSID;
-        System.out.println(url);
-        Connection conn = null;
-        conn = DriverManager.getConnection(url,user,pass);
-        int cnt;
-        ResultSet rs;
-        Class.forName("oracle.jdbc.driver.OracleDriver");
-
         String state="";
         String query="";
         String[] filter = request.getParameterValues("filter");

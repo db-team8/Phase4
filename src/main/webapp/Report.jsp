@@ -12,22 +12,12 @@
 <h2>AML 업무수행</h2>
 <h3>금융당국에 보고하기</h3>
 <div class="transaction">
-<% 
-	/*----------connect----------*/
-	String serverIP = "localhost";
-	String strSID = "orcl";
-	String portNum = "1521";
-	String user = "db8";
-	String pass = "db8";
-	String url = "jdbc:oracle:thin:@"+serverIP+":"+portNum+":"+strSID;
-	System.out.println(url);
-	Connection conn = null;
-	PreparedStatement pstmt;
-	int cnt;
-	ResultSet rs;
-	Class.forName("oracle.jdbc.driver.OracleDriver");
-	conn = DriverManager.getConnection(url,user,pass);
-%>
+<%@ include file="dbconn.jsp"%>
+	<%
+		PreparedStatement pstmt;
+		int cnt;
+		ResultSet rs;
+	%>
 <h4>-------------Dangerous Transaction for Report-------------</h4>
 <form action="result.jsp" method="post">
 <%
