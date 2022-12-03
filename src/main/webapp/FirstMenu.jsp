@@ -18,10 +18,10 @@
 	/*----------connect----------*/
 	
 	String serverIP = "localhost";
-	String strSID = "xe";
+	String strSID = "orcl";
 	String portNum = "1521";
 	String user = "db8";
-	String pass = "fjdksl";
+	String pass = "db8";
 	String url = "jdbc:oracle:thin:@"+serverIP+":"+portNum+":"+strSID;
 	System.out.println(url);
 	Connection conn = null;
@@ -32,7 +32,7 @@
 	conn = DriverManager.getConnection(url,user,pass);
 %>
 <%
-	String state="";
+	String status ="";
 	String[] filter = null;
 	if(request.getParameterValues("filter") != null) filter = request.getParameterValues("filter");
 	
@@ -53,13 +53,13 @@
 			out.println("<td>"+rs.getString(2)+"</td>");
 			out.println("<td>"+rs.getString(3)+"</td>");
 			switch(rs.getString(4)){
-				case "0" : state = "심사 필요";
+				case "0" : status = "심사 필요";
 				break;
-				case "1": state = "거래 허용";
+				case "1": status = "거래 허용";
 				break;
-				case "2": state = "거래 거부";
+				case "2": status = "거래 거부";
 				break;
-				case "3": state = "금융당국에 보고됨";
+				case "3": status = "금융당국에 보고됨";
 				break;
 			}
 			out.println("<td>"+state+"</td>");
@@ -87,13 +87,13 @@
 			out.println("<td>"+rs.getString(2)+"</td>");
 			out.println("<td>"+rs.getString(3)+"</td>");
 			switch(rs.getString(4)){
-				case "0" : state = "심사 필요";
+				case "0" : status = "심사 필요";
 				break;
-				case "1": state = "거래 허용";
+				case "1": status = "거래 허용";
 				break;
-				case "2": state = "거래 거부";
+				case "2": status = "거래 거부";
 				break;
-				case "3": state = "금융당국에 보고됨";
+				case "3": status = "금융당국에 보고됨";
 				break;
 			}
 			out.println("<td>"+state+"</td>");
@@ -123,13 +123,13 @@
 				out.println("<td>"+rs.getString(2)+"</td>");
 				out.println("<td>"+rs.getString(3)+"</td>");
 				switch(rs.getString(4)){
-					case "0" : state = "심사 필요";
+					case "0" : status = "심사 필요";
 					break;
-					case "1": state = "거래 허용";
+					case "1": status = "거래 허용";
 					break;
-					case "2": state = "거래 거부";
+					case "2": status = "거래 거부";
 					break;
-					case "3": state = "금융당국에 보고됨";
+					case "3": status = "금융당국에 보고됨";
 					break;
 				}
 				out.println("<td>"+state+"</td>");
@@ -157,13 +157,13 @@
 				out.println("<td>"+rs.getString(2)+"</td>");
 				out.println("<td>"+rs.getString(3)+"</td>");
 				switch(rs.getString(4)){
-					case "0" : state = "심사 필요";
+					case "0" : status = "심사 필요";
 					break;
-					case "1": state = "거래 허용";
+					case "1": status = "거래 허용";
 					break;
-					case "2": state = "거래 거부";
+					case "2": status = "거래 거부";
 					break;
-					case "3": state = "금융당국에 보고됨";
+					case "3": status = "금융당국에 보고됨";
 					break;
 				}
 				out.println("<td>"+state+"</td>");
