@@ -9,20 +9,19 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
-<h2>AML 업무수행</h2>
-<h3>위험 의심 거래를 확인하세요.</h3>
+<h2 class="bg-warning" style="display:inline;">&nbsp;&nbsp;AML 업무수행&nbsp;&nbsp;</h2>
+<h3>&nbsp;위험 의심 거래를 확인하세요.&nbsp;</h3>
 
-<div class="transaction" width="520px" id="transaction">
-	<h4>-------------Dangerous Transactions-------------</h4>
+<div class="transaction" width="500px" id="transaction">
 <!-- <iframe src="transactions.jsp" name='transaction'></iframe>  -->
 	<% 
 	/*----------connect----------*/
 	
 	String serverIP = "localhost";
-	String strSID = "orcl";
+	String strSID = "xe";
 	String portNum = "1521";
 	String user = "db8";
-	String pass = "db8";
+	String pass = "fjdksl";
 	String url = "jdbc:oracle:thin:@"+serverIP+":"+portNum+":"+strSID;
 	System.out.println(url);
 	Connection conn = null;
@@ -33,7 +32,7 @@
 	conn = DriverManager.getConnection(url,user,pass);
 %>
 <%
-	String status="";
+	String state="";
 	String[] filter = null;
 	if(request.getParameterValues("filter") != null) filter = request.getParameterValues("filter");
 	
@@ -54,16 +53,16 @@
 			out.println("<td>"+rs.getString(2)+"</td>");
 			out.println("<td>"+rs.getString(3)+"</td>");
 			switch(rs.getString(4)){
-				case "0" : status = "심사 필요";
+				case "0" : state = "심사 필요";
 				break;
-				case "1": status = "거래 허용";
+				case "1": state = "거래 허용";
 				break;
-				case "2": status = "거래 거부";
+				case "2": state = "거래 거부";
 				break;
-				case "3": status = "금융당국에 보고됨";
+				case "3": state = "금융당국에 보고됨";
 				break;
 			}
-			out.println("<td>"+status+"</td>");
+			out.println("<td>"+state+"</td>");
 			out.println("</tr>");		
 		}
 		out.println("</table>");
@@ -88,16 +87,16 @@
 			out.println("<td>"+rs.getString(2)+"</td>");
 			out.println("<td>"+rs.getString(3)+"</td>");
 			switch(rs.getString(4)){
-				case "0" : status = "심사 필요";
+				case "0" : state = "심사 필요";
 				break;
-				case "1": status = "거래 허용";
+				case "1": state = "거래 허용";
 				break;
-				case "2": status = "거래 거부";
+				case "2": state = "거래 거부";
 				break;
-				case "3": status = "금융당국에 보고됨";
+				case "3": state = "금융당국에 보고됨";
 				break;
 			}
-			out.println("<td>"+status+"</td>");
+			out.println("<td>"+state+"</td>");
 			out.println("</tr>");		
 		}
 		out.println("</table>");
@@ -124,16 +123,16 @@
 				out.println("<td>"+rs.getString(2)+"</td>");
 				out.println("<td>"+rs.getString(3)+"</td>");
 				switch(rs.getString(4)){
-					case "0" : status = "심사 필요";
+					case "0" : state = "심사 필요";
 					break;
-					case "1": status = "거래 허용";
+					case "1": state = "거래 허용";
 					break;
-					case "2": status = "거래 거부";
+					case "2": state = "거래 거부";
 					break;
-					case "3": status = "금융당국에 보고됨";
+					case "3": state = "금융당국에 보고됨";
 					break;
 				}
-				out.println("<td>"+status+"</td>");
+				out.println("<td>"+state+"</td>");
 				out.println("</tr>");		
 			}
 			out.println("</table>");
@@ -158,16 +157,16 @@
 				out.println("<td>"+rs.getString(2)+"</td>");
 				out.println("<td>"+rs.getString(3)+"</td>");
 				switch(rs.getString(4)){
-					case "0" : status = "심사 필요";
+					case "0" : state = "심사 필요";
 					break;
-					case "1": status = "거래 허용";
+					case "1": state = "거래 허용";
 					break;
-					case "2": status = "거래 거부";
+					case "2": state = "거래 거부";
 					break;
-					case "3": status = "금융당국에 보고됨";
+					case "3": state = "금융당국에 보고됨";
 					break;
 				}
-				out.println("<td>"+status+"</td>");
+				out.println("<td>"+state+"</td>");
 				out.println("</tr>");		
 			}
 			out.println("</table>");
@@ -184,32 +183,60 @@
 	<div class="options">
 	
 	<form method="post">
-		<div class="form-check form-switch">
+		<h4><div class="form-check form-switch">
 		  <input class="form-check-input" name="filter" value="2" type="checkbox" role="switch" id="flexSwitchCheckChecked">
 		  <label class="form-check-label" for="flexSwitchCheckChecked">심사가 필요한 거래만 보기</label>
 			<br><br>
 		 	<input class="form-check-input" name="filter" value="3" type="checkbox" role="switch" id="flexSwitchCheckChecked">
 			<label class="form-check-label" for="flexSwitchCheckChecked">위험도 점수 순으로 정렬하기</label>
-		</div>
+		</div></h4>
 			<br>
-		<button onclick="reloadDivArea()" value="적용">적용</button>
+		<button class='btn btn-warning' onclick="reloadDivArea()" value="적용"><h4>적용</h4></button>
 	
 	</form>
 
 	</div>
-	<br><br>
 
 <form name="permission" method="post">
-	<p>작업을 수행할 거래ID: <input type="text" name="txn_id"></p>
-		<br><br>
-		<button name="button" onclick="javascript: form.action='permission.jsp';" value=1>거래 허용</button>
-		<button name="button" onclick="javascript: form.action='permission.jsp';" value=2>거래 거부</button>
-		<button name="button" onclick="javascript: form.action='Report.jsp';" value=3>금융당국에 보고</button>
+	<p><h4>작업을 수행할 거래ID: <input type="text" name="txn_id"></h4></p>
+	<button class='btn btn-warning' name="button" onclick="javascript: form.action='permission.jsp';" value=1><h4>거래 허용</h4></button>
+	<button class='btn btn-warning' name="button" onclick="javascript: form.action='permission.jsp';" value=2><h4>거래 거부</h4></button>
+	<button class='btn btn-warning' name="button" onclick="javascript: form.action='Report.jsp';" value=3><h4>금융당국에 보고</h4></button>
 </form>
 
-	<div></div>
+<form name="permission" method="post">
+<button class="btn btn-warning" name="button" onclick="javascript: form.action='main.html';" value=1><h4>이전 단계</h4></button></form>
+
 </div>
 </body>
+
+<style>
+	html{
+		background-image: linear-gradient(rgba(239,239,239,0.5), rgba(239,239,239,0.5)), url('https://immigrantinvest.com/wp-content/uploads/2022/03/best-banks-2021-40543452.jpg');
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center center;
+		min-width: 100%;
+		min-height: 100%;
+	}
+	button {
+		margin: 15px;
+	}
+	#all{
+		padding: 30px;
+	}
+	body{
+		background-color: rgba(255,255,255,0.6);
+	}
+	.text-box{
+		font-size: 6em;
+		text-align: center;
+		color: #F1C164;
+		text-shadow: 5px 5px #16345A, 8px 8px #284D8E, 11px 11px #4D8CBF, 14px 14px #5FA9D9;
+		margin: 0;
+	}
+</style>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
 
 	reloadDivArea(); //함수 실행
