@@ -84,7 +84,7 @@
                         out.println("<label class='form-check-label' for='male'>남성</label>");
                         out.println("</div>");
                         out.println("<div class='form-check'>");
-                        out.println("<input class='form-check-input' type='radio' name='customer-gender' id='female' value='Female' checked>");
+                        out.println("<input class='form-check-input' type='radio' name='customer-gender' id='female' value='Female'>");
                         out.println("<label class='form-check-label' for='female'>여성</label>");
                         out.println("</div>");
                     }
