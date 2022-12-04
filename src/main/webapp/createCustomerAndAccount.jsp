@@ -143,7 +143,7 @@
             <a class="btn btn-warning" href="ThirdMenu.html"><h5>이전 단계로 돌아가기</h5></a>
         </div>
         <div class="col" name="title">
-            <a class="btn btn-warning" href="formCreateCustomer.jsp"><h5>고객 및 계좌 생성하기</h5></a>
+            <a class="btn btn-warning" href="formUpsertCustomer.jsp"><h5>고객 및 계좌 생성하기</h5></a>
         </div>
     </div>
     <style>
