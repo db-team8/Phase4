@@ -12,6 +12,7 @@
 <%@ include file="dbconn.jsp"%>
 <%
 	PreparedStatement pstmt;
+	int feedback;
 	int cnt;
 	ResultSet rs;
 %>

@@ -16,6 +16,7 @@
 %>
 <%
 	int txn_id = Integer.parseInt(request.getParameter("txn_id"));
+
 	// DNG_TXN UPDATE
 	String query = "UPDATE DNG_TXN SET STATUS=3 WHERE TXN_ID=?";
 	pstmt = conn.prepareStatement(query);
