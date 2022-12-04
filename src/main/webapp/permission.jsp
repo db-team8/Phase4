@@ -32,7 +32,7 @@
 		feedback = pstmt.executeUpdate();
 		
 		if(feedback==0) System.out.println("No Updated.");
-	    else out.println("<h4> 거래ID: "+txn_id+" 거래가 허가 되었습니다. </h4>");
+	    else out.println("<h4>&nbsp; 거래ID: "+txn_id+" 거래가 허가 되었습니다. </h4>");
 		
 		// TRANSACTION UPDATE
 		query = "UPDATE TRANSACTION SET STATUS='1' WHERE TXN_ID=?";
@@ -57,7 +57,7 @@
 		
 		feedback = pstmt.executeUpdate();
 		if(feedback==0) System.out.println("No Updated.");
-	    else out.println("<h4> 거래ID: "+txn_id+" 거래가 거부 되었습니다. </h4>");
+	    else out.println("<h4>&nbsp; 거래ID: "+txn_id+" 거래가 거부 되었습니다. </h4>");
 		
 		// TRANSACTION UPDATE
 		query = "UPDATE TRANSACTION SET STATUS='2' WHERE TXN_ID=?";
