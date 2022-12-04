@@ -29,7 +29,7 @@
   String pass = "db8"; // DB 패스워드
   
 
-(4) 기능 설명:
+(4) 유즈 케이스:
   클라이언트는 AML(Anti-money laundering, 자금 세탁 방지), 위험 관리, 고객 정보 추가 및 수정 등에 관련된 기능들을 수행할 수 있습니다.
  
   초기화면으로 간단한 인사 문구와 함께 AML 업무 수행, 위험 관리, 고객 정보 추가 및 수정을 위한 상세 페이지에 접근하기 위한 버튼이 있습니다.
@@ -53,7 +53,38 @@
     고객 및 계좌 등록을 선택한 경우 한 페이지에서 신규 고객에 대한 정보와 신규 계좌 번호와 계좌 비밀번호를 입력할 수 있고 생성 버튼을 눌러 작업을 완료합니다.
     고객 정보 수정을 클릭한 경우, 입력창에 변경할 고객의 정보를 입력하고 수정 버튼을 클릭해서 고객의 정보를 수정합니다.
 
-(5) Application 제작 환경:
+(5) 파일별 설명:
+  main.html: 홈페이지로 AML, 위험 관리, 고객 정보 추가 및 수정에 관련된 버튼이 있습니다.
+  |
+   - dbconn.jsp: 데이터베이스 연결 관련 코드입니다.
+  |
+   - SHA256.jsp: 계좌 비밀번호 암호화 관련 코드입니다.
+  |
+   - FirstMenu.jsp: 위험 거래를 보여주고, 특정 거래에 대해 허용, 거부, 금융당국에 보고를 위한 버튼이 있습니다.
+  |  |
+  |   - permission.jsp: 특정 거래를 허용 또는 거부하고 나서의 결과 페이지입니다.
+  |  |
+  |   - Report.jsp: 금융당국에 보고하기 위해 사유를 입력하는 창입니다.
+  |     |
+  |      - result.jsp: 금융당국에 보고한 후 처리를 위한 페이지입니다.
+  |
+   - SecondMenu.html: 위험 인물 거래 조회, 위험 계좌 거래 조회, 기간별 거래 조회, 특정 금액 이상 거래 조회를 위한 버튼이 있습니다.
+  |  |
+  |   - riskManagement.jsp: 위험 인물 거래 조회, 위험 계좌 거래 조회, 기간별 거래 조회, 특정 금액 이상 거래 조회 기능 네가지를 한번에 처리합니다.
+  |  
+   - ThirdMenu.html: 고객 및 계좌 등록, 고객 정보 수정을 위한 페이지입니다.
+     |
+      - formUpsertCustomer.jsp: 신규 고객 및 계좌 등록 또는 고객 정보 수정을 위한 페이지입니다.
+     |
+      - createCustomerAndAccount.jsp: formUpsertCustomer.jsp에서 새로 데이터를 생성한 후 보여주는 결과 페이지입니다.
+     |
+      - updateCustomerAndAccount.jsp: formUpsertCustomer.jsp에서 정보를 수정하고 보여주는 결과 페이지입니다.
+     |
+      - customers.jsp: 고객 정보 수정을 위해 고객 정보를 보여주는 페이지입니다.
+  
+  
+
+(6) Application 제작 환경:
   IntelliJ 버전: 2022.2.3 빌드: 222.4345.14
   Eclipse IDE for Enterprise Java and Web Developers 버전: 2021-09 (4.21.0)
   Arm64 MacBook 21.6.0 Darwin Kernel Version 21.6.0
@@ -65,7 +96,7 @@
   ORACLE SQL Developer 22.2.1
   
   
-(6) TRANSACTION TABLE 컬럼 추가 사항 :
+(7) TRANSACTION TABLE 컬럼 추가 사항 :
   - TRANSACTION TABLE 컬럼 추가 : ALTER TABLE TRANSACTION ADD STATUS CHAR(1) DEFAULT '1';
   - STATUS DATA 의미
     0: 거래 대기
