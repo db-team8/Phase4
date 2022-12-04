@@ -107,7 +107,7 @@
             stmt.close();
             conn.close();
         } catch(SQLException e) {
-            resultText = "고객 정보와 계좌를 만드는데 실패햐였습니다. 다시 시도해주세요.";
+            resultText = "고객 정보와 계좌를 만드는데 실패하였습니다. 다시 시도해주세요.";
             success = false;
             if (stmt != null) {
                 stmt.cancel();

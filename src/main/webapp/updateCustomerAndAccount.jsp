@@ -44,7 +44,7 @@
             throw new Exception("contact not matching regular expression.");
         }
 
-        if (accountPassword != accountPassword2) {
+        if (!accountPassword.equals(accountPassword2)) {
             resultText = "입력한 두 비밀번호가 맞지 않습니다.";
             throw new Exception("contact not matching regular expression.");
         }
@@ -99,7 +99,7 @@
         stmt.close();
         conn.close();
     } catch(SQLException e) {
-        resultText = "고객 정보와 계좌를 만드는데 실패햐였습니다. 다시 시도해주세요.";
+        resultText = "고객 정보와 계좌를 만드는데 실패하였습니다. 다시 시도해주세요.";
         success = false;
         e.printStackTrace();
     } catch (Exception e) {

@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="UTF-8"%>
 <%@ page language="java" import="java.text.*,java.sql.*" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
 <title>AML SYSTEM</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
@@ -26,7 +25,7 @@
 
     int feedback = pstmt.executeUpdate();
     if(feedback==0) out.println("No Updated.");
-    else out.println("°Å·¡ID: "+txn_id+"°¡ º¸°íµÇ¾ú½À´Ï´Ù.");
+    else out.println("거래ID: "+txn_id+"가 보고되었습니다.");
 	
  // TRANSACTION UPDATE
     query = "UPDATE TRANSACTION SET STATUS='2' WHERE TXN_ID=?";

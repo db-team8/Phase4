@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="EUC-KR">
 	<title>AML SYSTEM</title>
 </head>
 
