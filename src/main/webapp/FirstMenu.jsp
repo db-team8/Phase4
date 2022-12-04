@@ -19,7 +19,6 @@
 	PreparedStatement pstmt;
 	int cnt;
 	ResultSet rs;
-	
 	//Commit for insertion when a trigger occurs 보장
 	conn.setAutoCommit(false);
 	conn.commit(); 
