@@ -42,7 +42,7 @@
 
 (4) Application 제작 환경:
   IntelliJ 버전: 2022.2.3 빌드: 222.4345.14
-  Ecliple IDE for Java Developers 버전: 2019-06 (4.12.0)
+  Eclipse IDE for Enterprise Java and Web Developers 버전: 2021-09 (4.21.0)
   Arm64 MacBook 21.6.0 Darwin Kernel Version 21.6.0
   colima version 0.4.6
   Docker version 20.10.17
