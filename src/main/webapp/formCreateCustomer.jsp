@@ -83,7 +83,13 @@
             <h4>
                 <label for="customer-account-password" class="form-label">신규 계좌 비밀번호</label>
             </h4>
-            <input type="numer" value="4123" class="form-control" id="customer-account-password" name="customer-account-password" required>
+            <input type="password" value="4123" class="form-control" id="customer-account-password" name="customer-account-password" required>
+        </div>
+        <div class="mb-3">
+            <h4>
+                <label for="customer-account-password2" class="form-label">신규 계좌 비밀번호</label>
+            </h4>
+            <input type="password" value="4123" class="form-control" id="customer-account-password2" name="customer-account-password2" required>
         </div>
         <button type="submit" class="btn btn-warning">고객 정보 생성</button>
     </form>

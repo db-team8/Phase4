@@ -14,6 +14,7 @@
         String nationality = request.getParameter("customer-nationality");
         String contact = request.getParameter("customer-contact");
         String accountPassword = request.getParameter("customer-account-password");
+        String accountPassword2 = request.getParameter("customer-account-password2");
         String resultText = null;
         boolean success = false;
         int holderId = -1;
@@ -32,6 +33,12 @@
         try {
             String contactRegex = "[0-9]{3}-[0-9]{3}-[0-9]{4}";
             if (!contact.matches(contactRegex)) {
+                resultText = "연락처를 XXX-XXX-XXXX 형태로 입력해주세요.";
+                throw new Exception("contact not matching regular expression.");
+            }
+
+            if (accountPassword != accountPassword2) {
+                resultText = "입력한 두 비밀번호가 맞지 않습니다.";
                 throw new Exception("contact not matching regular expression.");
             }
             conn.setAutoCommit(false);
@@ -98,9 +105,14 @@
             }
             stmt.close();
             conn.close();
-        } catch(Exception e) {
+        } catch(SQLException e) {
+            resultText = "고객 정보와 계좌를 만드는데 실패햐였습니다. 다시 시도해주세요.";
             success = false;
-            resultText = "고객 정보와 계좌를 만드는데 오류가 발생했습니다. 다시 시도해주세요.";
+            stmt.cancel();
+            pstmt.cancel();
+            e.printStackTrace();
+        } catch (Exception e) {
+            success = false;
             if (stmt != null) {
                 stmt.cancel();
             }
