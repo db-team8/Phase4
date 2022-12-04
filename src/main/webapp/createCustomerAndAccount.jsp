@@ -108,8 +108,12 @@
         } catch(SQLException e) {
             resultText = "고객 정보와 계좌를 만드는데 실패햐였습니다. 다시 시도해주세요.";
             success = false;
-            stmt.cancel();
-            pstmt.cancel();
+            if (stmt != null) {
+                stmt.cancel();
+            }
+            if (pstmt != null) {
+                pstmt.cancel();
+            }
             e.printStackTrace();
         } catch (Exception e) {
             success = false;
