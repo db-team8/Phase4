@@ -37,10 +37,11 @@
                 throw new Exception("contact not matching regular expression.");
             }
 
-            if (accountPassword != accountPassword2) {
+            if (!accountPassword.equals(accountPassword2)) {
                 resultText = "입력한 두 비밀번호가 맞지 않습니다.";
-                throw new Exception("contact not matching regular expression.");
+                throw new Exception("passwords not match.");
             }
+
             conn.setAutoCommit(false);
             conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
 
