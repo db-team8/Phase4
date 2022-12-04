@@ -1,11 +1,23 @@
-(1) 실행 방법:
+(1) 웹서비스 시작 전, Trigger 실행
+  Team8-trigger.sql 파일을 SQL PLUS 또는 SQL Developer에서 컴파일합니다.(프로시저 2개와 트리거 1개, 총 3개가 컴파일 됨.)
+  다음 구문을 실행합니다.
+  ALTER TRIGGER TXN_ALERT ENABLE;
+  SET SERVEROUTPUT ON;
+  
+  **트리거 관련 주의사항
+   - Trigger를 개발하는 과정에서, TRANSACTION TABLE에 추가 컬럼이 필요하여 생성하였습니다. 관련 사항은 아래에서 기술하겠습니다.
+   - 웹사이트에서 거래를 추가하는 부분은 구현되어있지 않아 트리거를 테스트하고 싶다면 번거롭지만 다음과 같은 작업을 진행해야 합니다.
+     : TRANSACTION TABLE에 DATA를 INSERT 하기 전, DNG_TXN 테이블의 FOREIGN KEY CONSTRAINT 비활성화(ALTER TABLE DNG_TXN DISABLE CONSTRAINT SYS_C007781;)를 해야합니다. INSERT 이후 다시 활성화(ALTER TABLE DNG_TXN ENABLE CONSTRAINT SYS_C007781;)하면 됩니다. 
+   
+
+(2) 실행 방법:
   team8-phase4.zip의 압축을 풀고 프로젝트 전체를 eclipse 상에서 프로젝트 열기를 합니다.
   eclipse 상에서 oracle DB와 tomcat 환경 셋업을 합니다.
   oracle DB을 작동시킨 상태에서 tomcat 서버 가동을 합니다.
 
 클라이언트는 http://서버ip:포트번호/webapp/main.html를 통해 웹서비스에 접속합니다.
 
-(2) 실행 주의 사항:
+(3) 실행 주의 사항:
   기존 Phase 2의 Team8-Phase-2-1.sql와 Team8-Phase-2-2.sql에 대해 데이터가 DB상에 추가되어있어야합니다.
   oracle DB 환경을 셋업할 때 eclipse 상에서 ojdbc8.jar를 라이브러리로 추가해 드라이버를 불러와야합니다.
 
@@ -15,8 +27,9 @@
   String portNum = "1152"; // DB 포트 번호
   String user = "db8"; // DB 유저명
   String pass = "db8"; // DB 패스워드
+  
 
-(3) 기능 설명:
+(4) 기능 설명:
   클라이언트는 AML(Anti-money laundering, 자금 세탁 방지), 위험 관리, 고객 정보 추가 및 수정 등에 관련된 기능들을 수행할 수 있습니다.
  
   초기화면으로 간단한 인사 문구와 함께 AML 업무 수행, 위험 관리, 고객 정보 추가 및 수정을 위한 상세 페이지에 접근하기 위한 버튼이 있습니다.
@@ -40,9 +53,9 @@
     고객 및 계좌 등록을 선택한 경우 한 페이지에서 신규 고객에 대한 정보와 신규 계좌 번호와 계좌 비밀번호를 입력할 수 있고 생성 버튼을 눌러 작업을 완료합니다.
     고객 정보 수정을 클릭한 경우, 입력창에 변경할 고객의 정보를 입력하고 수정 버튼을 클릭해서 고객의 정보를 수정합니다.
 
-(4) Application 제작 환경:
+(5) Application 제작 환경:
   IntelliJ 버전: 2022.2.3 빌드: 222.4345.14
-  Ecliple IDE for Java Developers 버전: 2019-06 (4.12.0)
+  Eclipse IDE for Enterprise Java and Web Developers 버전: 2021-09 (4.21.0)
   Arm64 MacBook 21.6.0 Darwin Kernel Version 21.6.0
   colima version 0.4.6
   Docker version 20.10.17
@@ -50,3 +63,11 @@
   Oracle Database 21c Express Edition Release 21.0.0.0.0 - Production
   Version 21.3.0.0.0
   ORACLE SQL Developer 22.2.1
+  
+  
+(6) TRANSACTION TABLE 컬럼 추가 사항 :
+  - TRANSACTION TABLE 컬럼 추가 : ALTER TABLE TRANSACTION ADD STATUS CHAR(1) DEFAULT '1';
+  - STATUS DATA 의미
+    0: 거래 대기
+    1: 거래 허용
+    2: 거래 거부

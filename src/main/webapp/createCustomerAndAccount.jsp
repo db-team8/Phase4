@@ -37,10 +37,11 @@
                 throw new Exception("contact not matching regular expression.");
             }
 
-            if (accountPassword != accountPassword2) {
+            if (!accountPassword.equals(accountPassword2)) {
                 resultText = "입력한 두 비밀번호가 맞지 않습니다.";
-                throw new Exception("contact not matching regular expression.");
+                throw new Exception("passwords not match.");
             }
+
             conn.setAutoCommit(false);
             conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
 
@@ -108,8 +109,12 @@
         } catch(SQLException e) {
             resultText = "고객 정보와 계좌를 만드는데 실패햐였습니다. 다시 시도해주세요.";
             success = false;
-            stmt.cancel();
-            pstmt.cancel();
+            if (stmt != null) {
+                stmt.cancel();
+            }
+            if (pstmt != null) {
+                pstmt.cancel();
+            }
             e.printStackTrace();
         } catch (Exception e) {
             success = false;
@@ -143,7 +148,7 @@
             <a class="btn btn-warning" href="ThirdMenu.html"><h5>이전 단계로 돌아가기</h5></a>
         </div>
         <div class="col" name="title">
-            <a class="btn btn-warning" href="formCreateCustomer.jsp"><h5>고객 및 계좌 생성하기</h5></a>
+            <a class="btn btn-warning" href="formUpsertCustomer.jsp"><h5>고객 및 계좌 생성하기</h5></a>
         </div>
     </div>
     <style>

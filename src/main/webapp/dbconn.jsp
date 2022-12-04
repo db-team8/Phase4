@@ -1,4 +1,4 @@
-<%@ page import="java.sql.*"%>�
+<%@ page import="java.sql.*"%>
 <%
   String serverIP = "localhost";
   String strSID = "xe";
