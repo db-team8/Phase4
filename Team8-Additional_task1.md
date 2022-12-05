@@ -8,7 +8,7 @@ Phase 1에서 ER diagram을 통해 logical database를 설계할 때 real world�
 ## 문제 원인
 고객(HODER) 테이블은 primary key로 H_ID를 가지며 이는 surrogate key 입니다. 계좌(ACCOUNT) 테이블의 primary key는 ACCOUNT_NUMBER이고 foreign key는 H_ID로 고객의 H_ID를 값으로 가집니다. 
 
-시스템 관리자가 생성할 고객의 이름, 성별, 주소, 국적, 전화번호, 신규 계좌 비밀번호를 애플리케이션의 폼에 입력해주면 아래의 연속된 두 쿼리를 통해 전달된 정보를 이용하여 신규 고객과 계좌를 생성합니다. 이때 신규 고객을 생성할 떄 HODLER.H_ID를 `SELECT MAX(H_ID) + 1 FROM HOLDER` 서브쿼리로 set 하고 해당 고객의 신규 계좌를 생성할 때는 ACCOUNT.H_ID를 `SELECT MAX(H_ID) FROM HOLDER` 서브쿼리로 set 합니다. 따라서 연속된 두 쿼리 사이의 아주 짧은 시간에 다른 프로세스에서 새로운 고객을 추가하는 쿼리를 실행하게 되면 ACCOUNT.H_ID가 잘못된 HOLDER.H_ID로 설정되는 문제가 발생하게 됩니다.
+시스템 관리자가 생성할 고객의 이름, 성별, 주소, 국적, 전화번호, 신규 계좌 비밀번호를 애플리케이션의 폼에 입력해주면 아래의 연속된 두 쿼리를 통해 전달된 정보를 이용하여 신규 고객과 계좌를 생성합니다. 이때 신규 고객을 생성할 때 HODLER.H_ID를 `SELECT MAX(H_ID) + 1 FROM HOLDER` 서브쿼리로 set 하고 해당 고객의 신규 계좌를 생성할 때는 ACCOUNT.H_ID를 `SELECT MAX(H_ID) FROM HOLDER` 서브쿼리로 set 합니다. 따라서 연속된 두 쿼리 사이의 아주 짧은 시간에 다른 프로세스에서 새로운 고객을 추가하는 쿼리를 실행하게 되면 ACCOUNT.H_ID가 잘못된 HOLDER.H_ID로 설정되는 문제가 발생하게 됩니다.
 
 ```sql
 INSERT INTO HOLDER (H_ID, NAME, SEX, ADDRESS, NATIONALITY, PHONE_NUMBER) VALUES ((SELECT MAX(H_ID) + 1 FROM HOLDER), ${input_name}, ${input_sex}, ${input_address}, ${input_nationality}, ${input_phone_number});
@@ -36,4 +36,4 @@ INSERT INTO HOLDER (H_ID, NAME, SEX, ADDRESS, NATIONALITY, PHONE_NUMBER) VALUES 
 
 INSERT INTO ACCOUNT (ACCOUNT_NUMBER, BALANCE, PASSWORD, H_ID) VALUES (max_h_id_var + 1, 0, ${encrypted_input_password}, (SELECT MAX(H_ID) FROM HOLDER));
 ```
-추가로 JDBC에서 위의 세 쿼리로 transaction 처리없이 동일하게 고객과 계좌 정보를 생성할 수 있습니다. 첫 번째 쿼리를 통해 H_ID의 최댓값을 max_h_id_var에 저장해두고 이를 이용하여 아래 두 쿼리를 수행하게 됩니다. 하지만 transaction으로 처리하는 것이 각 두 쿼리에 서브 쿼리가 있음에도 불구하고 실제 database I/O는 두 번이므로 성능은 더 좋을 거싱라고 예상됩니다.
+추가로 JDBC에서 위의 세 쿼리로 transaction 처리없이 동일하게 고객과 계좌 정보를 생성할 수 있습니다. 첫 번째 쿼리를 통해 H_ID의 최댓값을 max_h_id_var에 저장해두고 이를 이용하여 아래 두 쿼리를 수행하게 됩니다. 하지만 transaction으로 처리하는 것이 각 두 쿼리에 서브 쿼리가 있음에도 불구하고 실제 database I/O는 두 번이므로 성능은 더 좋을 것이라고 예상됩니다.
