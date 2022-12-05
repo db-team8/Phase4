@@ -54,7 +54,7 @@
 </div>
 	<br>
 	<label><h4>&nbsp;보고사유</h4></label>
-		<textarea name="" id="" cols="200" rows="30"></textarea>
+		<textarea name="" id="" cols="200" rows="10"></textarea>
 		<br><br>
 	<input class="btn btn-warning" type="submit" value="Report">
 
@@ -79,14 +79,6 @@
 	}
 	body{
 		background-color: rgba(255,255,255,0.6);
-	}
-	.title{
-
-		background-color: blueviolet;
-	}
-	.menu{
-
-		background-color:white;
 	}
 	#contents{
 		display:block;
